@@ -176,14 +176,15 @@ async function allocateSpend(stub, spend) {
   }
 	
   //############### new code for Nursery smart funding contract###########
-	JSON_NGO = JSON.parse(ngoQuery.toString());
-	a = parseInt(JSON_NGO['alpha_threshold'], 10);
-	b = parseInt(JSON_NGO['beta_threshold'], 10);
-	c = parseInt(JSON_NGO['charlie_threshold'], 10);
-	d =parseInt(JSON_NGO['donation_needed'], 10);
-	alpha_amount = a*d;
-	beta_amount = b*d;
-	charlie_amount = c*d;
+	let JSON_NGO = JSON.parse(ngoQuery.toString());
+	let a = parseInt(JSON_NGO['alpha_threshold'], 10);
+	let b = parseInt(JSON_NGO['beta_threshold'], 10);
+	let c = parseInt(JSON_NGO['charlie_threshold'], 10);
+	let d =parseInt(JSON_NGO['donation_needed'], 10);
+	let alpha_amount = a*d;
+	let beta_amount = b*d;
+	let charlie_amount = c*d;
+	console.log('alpha, beta, charlie '+a+'-'+b+'-'+c+'-'+d);
   //#######################################################################
   
   // first, get the total amount of donations donated to this NGO
