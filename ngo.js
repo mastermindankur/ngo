@@ -741,7 +741,7 @@ let Chaincode = class {
     let ngoKey = 'ngo' + json['ngoRegistrationNumber'];
     let ngoQuery = await stub.getState(ngoKey);
     if (!ngoQuery.toString()) {
-      throw new Error('##### createDonation - Cannot create spend record as the NGO does not exist: ' + json['ngoRegistrationNumber']);
+      throw new Error('##### createDonation - Cannot create spend record as the NGO does not exist ABDUL: ' + json['ngoRegistrationNumber']+ngoQuery);
     }
 
     // Check if the Spend already exists
