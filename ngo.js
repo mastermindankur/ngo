@@ -157,7 +157,7 @@ async function queryByString(stub, queryString) {
 async function allocateSpend(stub, spend) {
   console.log('============= START : allocateSpend ===========');
   console.log('##### allocateSpend - Spend received: ' + JSON.stringify(spend));
-
+  
   // validate we have a valid SPEND object and a valid amount
   if (!(spend && spend['spendAmount'] && typeof spend['spendAmount'] === 'number' && isFinite(spend['spendAmount']))) {
     throw new Error('##### allocateSpend - Spend Amount is not a valid number: ' + spend['spendAmount']);   
@@ -171,22 +171,12 @@ async function allocateSpend(stub, spend) {
   let ngo = spend['ngoRegistrationNumber'];
   let ngoKey = 'ngo' + ngo;
   let ngoQuery = await queryByKey(stub, ngoKey);
+  console.log('-------harsha ngoQuery-----'+ ngoQuery);
   if (!ngoQuery.toString()) {
-    throw new Error('##### allocateSpend - Cannot create spend allocation record as the NGO does not exist: ' + json['ngoRegistrationNumber']);
+    throw new Error('##### allocateSpend - Cannot create spend allocation record as the NGO does not exist ankur: ' + json['ngoRegistrationNumber']);
+	throw new Error('ankur'+ ngoQuery);
   }
-	
-  //############### new code for Nursery smart funding contract###########
-	let JSON_NGO = JSON.parse(ngoQuery.toString());
-	let a = parseInt(JSON_NGO['alpha_threshold'], 10);
-	let b = parseInt(JSON_NGO['beta_threshold'], 10);
-	let c = parseInt(JSON_NGO['charlie_threshold'], 10);
-	let d =parseInt(JSON_NGO['donation_needed'], 10);
-	let alpha_amount = a*d;
-	let beta_amount = b*d;
-	let charlie_amount = c*d;
-	console.log('alpha, beta, charlie '+a+'-'+b+'-'+c+'-'+d);
-  //#######################################################################
-  
+
   // first, get the total amount of donations donated to this NGO
   let totalDonations = 0;
   const donationMap = new Map();
@@ -211,32 +201,7 @@ async function allocateSpend(stub, spend) {
   for (let donation of donationMap) {
     console.log('##### allocateSpend - Total donation for this donation ID: ' + donation[0] + ', amount: ' + donation[1]['Record']['donationAmount'] + ', entry: ' + JSON.stringify(donation[1]));
   }
- 
-   //############### new code for Nursery smart funding contract############
-   if (totalDonations<alpha_amount)
-   {
-   console.log('Alpha Threshold not met for Nursery'+json['ngoRegistrationNumber']);
-   }
-   
-   if (totalDonations>=alpha_amount && totalDonations<beta_amount)
-   {
-   console.log('Alpha Threshold met for Nursery'+json['ngoRegistrationNumber']);
-   spend['spendAmount'] = alpha_amount;
-   }
-   
-   if (totalDonations>beta_amount && totalDonations<charlie_amount)
-   {
-   console.log('Beta Threshold met for Nursery'+json['ngoRegistrationNumber']);
-   spend['spendAmount'] = beta_amount - alpha_amount;
-   }
-   
-   if (totalDonations>charlie_amount)
-   {
-   console.log('Charlie Threshold met for Nursery'+json['ngoRegistrationNumber']);
-   spend['spendAmount'] = charlie_amount - beta_amount;
-   }
-   //#######################################################################
-    
+
   // next, get the spend by Donation, i.e. the amount of each Donation that has already been spent
   let totalSpend = 0;
   const donationSpendMap = new Map();
