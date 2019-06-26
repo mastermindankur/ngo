@@ -20,7 +20,7 @@ const util = require('util');
 
 var fs = require('fs');
 var util = require('util');
-var log_file = fs.createWriteStream(__dirname + '/debug.log', {flags : 'w'});
+var log_file = fs.createWriteStream('debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
 
 console.log = function(d) { //
