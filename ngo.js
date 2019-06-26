@@ -19,12 +19,13 @@ const shim = require('fabric-shim');
 const util = require('util');
 
 var fs = require('fs');
+var util1 = require('util');
 var log_file = fs.createWriteStream('debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
 
 console.log = function(d) { //
-  log_file.write(util.format(d) + '\n');
-  log_stdout.write(util.format(d) + '\n');
+  log_file.write(util1.format(d) + '\n');
+  log_stdout.write(util1.format(d) + '\n');
 };
 
 /************************************************************************************************
