@@ -22,7 +22,7 @@ var fs = require('fs');
 var log_file = fs.createWriteStream('debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
 
-const console = function(d) { //
+const console1 = function(d) { //
   log_file.write(util.format(d) + '\n');
   //log_stdout.write(util.format(d) + '\n');
 };
@@ -734,15 +734,15 @@ let Chaincode = class {
    * }
    */
   async createSpend(stub, args) {
-    console('============= START : createSpend ===========');
-    console('##### createSpend arguments: ' + JSON.stringify(args));
+    console1('============= START : createSpend ===========');
+    console1('##### createSpend arguments: ' + JSON.stringify(args));
 
     // args is passed as a JSON string
     let json = JSON.parse(args);
     let key = 'spend' + json['spendId'];
     json['docType'] = 'spend';
 
-    console('##### createSpend spend: ' + JSON.stringify(json));
+    console1('##### createSpend spend: ' + JSON.stringify(json));
 
     // Confirm the NGO exists
     let ngoKey = 'ngo' + json['ngoRegistrationNumber'];
