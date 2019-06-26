@@ -19,13 +19,12 @@ const shim = require('fabric-shim');
 const util = require('util');
 
 var fs = require('fs');
-var util1 = require('util');
 var log_file = fs.createWriteStream('debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
 
-console.log = function(d) { //
-  log_file.write(util1.format(d) + '\n');
-  log_stdout.write(util1.format(d) + '\n');
+const console = function(d) { //
+  log_file.write(util.format(d) + '\n');
+  //log_stdout.write(util.format(d) + '\n');
 };
 
 /************************************************************************************************
@@ -735,15 +734,15 @@ let Chaincode = class {
    * }
    */
   async createSpend(stub, args) {
-    console.log('============= START : createSpend ===========');
-    console.log('##### createSpend arguments: ' + JSON.stringify(args));
+    console('============= START : createSpend ===========');
+    console('##### createSpend arguments: ' + JSON.stringify(args));
 
     // args is passed as a JSON string
     let json = JSON.parse(args);
     let key = 'spend' + json['spendId'];
     json['docType'] = 'spend';
 
-    console.log('##### createSpend spend: ' + JSON.stringify(json));
+    console('##### createSpend spend: ' + JSON.stringify(json));
 
     // Confirm the NGO exists
     let ngoKey = 'ngo' + json['ngoRegistrationNumber'];
