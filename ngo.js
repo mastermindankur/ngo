@@ -19,7 +19,6 @@ const shim = require('fabric-shim');
 const util = require('util');
 
 var fs = require('fs');
-var util = require('util');
 var log_file = fs.createWriteStream('debug.log', {flags : 'w'});
 var log_stdout = process.stdout;
 
