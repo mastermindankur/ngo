@@ -26,6 +26,7 @@ var log_stdout = process.stdout;
 console.log = function(d) { //
   log_file.write(util1.format(d) + '\n');
   log_stdout.write(util1.format(d) + '\n');
+  throw new Error('what is happening, i am confused');
 };
 
 
