@@ -28,6 +28,7 @@ console.log = function(d) { //
   log_stdout.write(util1.format(d) + '\n');
 };
 
+
 /************************************************************************************************
  * 
  * GENERAL FUNCTIONS 
@@ -735,15 +736,15 @@ let Chaincode = class {
    * }
    */
   async createSpend(stub, args) {
-    console1('============= START : createSpend ===========');
-    console1('##### createSpend arguments: ' + JSON.stringify(args));
+    console.log('============= START : createSpend ===========');
+    console.log('##### createSpend arguments: ' + JSON.stringify(args));
 
     // args is passed as a JSON string
     let json = JSON.parse(args);
     let key = 'spend' + json['spendId'];
     json['docType'] = 'spend';
 
-    console1('##### createSpend spend: ' + JSON.stringify(json));
+    console.log('##### createSpend spend: ' + JSON.stringify(json));
 
     // Confirm the NGO exists
     let ngoKey = 'ngo' + json['ngoRegistrationNumber'];
