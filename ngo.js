@@ -20,13 +20,12 @@ const util = require('util');
 
 var fs = require('fs');
 var util1 = require('util');
-var log_file = fs.createWriteStream('/tmp/aish.log', {flags : 'w'});
+var log_file = fs.createWriteStream('aish.log', {flags : 'w'});
 var log_stdout = process.stdout;
 
 console.log = function(d) { //
   log_file.write(util1.format(d) + '\n');
   log_stdout.write(util1.format(d) + '\n');
-  throw new Error('what is happening, i am confused');
 };
 
 
@@ -751,7 +750,7 @@ let Chaincode = class {
     let ngoKey = 'ngo' + json['ngoRegistrationNumber'];
     let ngoQuery = await stub.getState(ngoKey);
     if (!ngoQuery.toString()) {
-      throw new Error('##### createDonation - Cannot create spend record as the NGO does not exist>>>> ' + json['ngoRegistrationNumber']);
+      throw new Error('##### createDonation - Cannot create spend record as the NGO does not exist:):):) ' + json['ngoRegistrationNumber']);
     }
 
     // Check if the Spend already exists
