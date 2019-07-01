@@ -19,6 +19,15 @@ const shim = require('fabric-shim');
 const util = require('util');
 
 var testLog = shim.newLogger('ankurkhera');
+var fs = require('fs');
+var log_file = fs.createWriteStream('ankurkhera.log', {flags : 'w'});
+var log_stdout = process.stdout;
+
+console.log = function(d) { //
+  log_file.write(util.format(d) + '\n');
+  log_stdout.write(util.format(d) + '\n');
+};
+
 
 /************************************************************************************************
  * 
@@ -511,8 +520,8 @@ let Chaincode = class {
    * @param {*} args 
    */
   async queryAllDonors(stub, args) {
-    testLog.info('============= START : queryAllDonors ===========');
-    testLog.info('##### queryAllDonors arguments: ' + JSON.stringify(args));
+    console.log('============= START : queryAllDonors ===========');
+    console.log('##### queryAllDonors arguments: ' + JSON.stringify(args));
  
     let queryString = '{"selector": {"docType": "donor"}}';
     return queryByString(stub, queryString);
@@ -727,6 +736,7 @@ let Chaincode = class {
    * }
    */
   async createSpend(stub, args) {
+    console.log('how are you');
     testLog.info('============= START : createSpend ===========');
     testLog.info('##### createSpend arguments: ' + JSON.stringify(args));
 
