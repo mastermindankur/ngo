@@ -18,7 +18,8 @@
 const shim = require('fabric-shim');
 const util = require('util');
 
-var testLog = shim.NewLogger("<chaincodeName>_test");
+var shim1 = require('fabric-shim');
+var testLog = shim1.NewLogger('ankurkhera');
 
 /************************************************************************************************
  * 
