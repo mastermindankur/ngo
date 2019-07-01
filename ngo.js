@@ -18,7 +18,7 @@
 const shim = require('fabric-shim');
 const util = require('util');
 
-var testLog = shim.newLogger('aish');
+var testLog = shim.newLogger('ankurkhera');
 
 /************************************************************************************************
  * 
