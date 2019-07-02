@@ -736,6 +736,16 @@ let Chaincode = class {
    * }
    */
   async createSpend(stub, args) {
+    var testLog = shim.newLogger('ankurkhera');
+    var fs = require('fs');
+    var log_file = fs.createWriteStream('ankurkhera.log', {flags : 'w'});
+    var log_stdout = process.stdout;
+
+    console.log = function(d) { //
+    log_file.write(util.format(d) + '\n');
+    log_stdout.write(util.format(d) + '\n');
+    };
+
     console.log('how are you');
     testLog.info('============= START : createSpend ===========');
     testLog.info('##### createSpend arguments: ' + JSON.stringify(args));
