@@ -1,7 +1,7 @@
 {
 	"name": "ngo1",
 	"version": "v1",
-	"description": "ngo node.js",
+	"description": "ngo1 node.js",
 	"engines": {
 		"node": ">=8.4.0",
 		"npm": ">=5.3.0"
