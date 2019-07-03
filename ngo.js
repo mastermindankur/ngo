@@ -735,35 +735,35 @@ let Chaincode = class {
    *    "spendAmount":33,
    * }
    */
-  async createSpend11(stub, args) {
+  async createSpend(stub, args) {
     console.log('how are you');
-    testLog.info('============= START : createSpend11 ===========');
-    testLog.info('##### createSpend11 arguments: ' + JSON.stringify(args));
+    testLog.info('============= START : createSpend ===========');
+    testLog.info('##### createSpend arguments: ' + JSON.stringify(args));
 
     // args is passed as a JSON string
     let json = JSON.parse(args);
     let key = 'spend' + json['spendId'];
     json['docType'] = 'spend';
 
-    testLog.info('##### createSpend11 spend: ' + JSON.stringify(json));
+    testLog.info('##### createSpend spend: ' + JSON.stringify(json));
 
     // Confirm the NGO exists
     let ngoKey = 'ngo' + json['ngoRegistrationNumber'];
     let ngoQuery = await stub.getState(ngoKey);
     if (!ngoQuery.toString()) {
-      throw new Error('##### createDonation - Cannot create spend record as the NGO does not exist: abdul ' + json['ngoRegistrationNumber']);
+      throw new Error('##### createDonation - Cannot create spend record as the NGO does not exist: hmmmmm ' + json['ngoRegistrationNumber']);
     }
 
     // Check if the Spend already exists
     let spendQuery = await stub.getState(key);
     if (spendQuery.toString()) {
-      throw new Error('##### createSpend11 - This Spend already exists: ' + json['spendId']);
+      throw new Error('##### createSpend - This Spend already exists: ' + json['spendId']);
     }
 
     await allocateSpend(stub, json);
 
     await stub.putState(key, Buffer.from(JSON.stringify(json)));
-    testLog.info('============= END : createSpend11 ===========');
+    testLog.info('============= END : createSpend ===========');
   }
 
   /**
