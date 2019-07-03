@@ -1,4 +1,3 @@
-
 const util = require('util');
 
 var fs = require('fs');
@@ -13,4 +12,4 @@ console.log = function(d) { //
 
 console.log("ankur khera is a good boy");
 console.log("escolombie");
-~
+
